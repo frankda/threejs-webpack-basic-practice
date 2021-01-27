@@ -58,7 +58,7 @@ export function initCamera(initialPosition) {
 }
 
 export function initTrackballControls(camera, renderer) {
-    var trackballControls = new TrackballControls(camera, renderer.domElement);
+    const trackballControls = new TrackballControls(camera, renderer.domElement);
     trackballControls.rotateSpeed = 1.0;
     trackballControls.zoomSpeed = 1.2;
     trackballControls.panSpeed = 0.8;
@@ -69,4 +69,26 @@ export function initTrackballControls(camera, renderer) {
     trackballControls.keys = [65, 83, 68];
 
     return trackballControls;
+}
+
+export function addBackgroundPlane(scene, texture) {
+    const withTexture = (texture !== undefined) ? texture : false;
+
+    const planeGeometry = new THREE.PlaneGeometry(10000, 10000);
+    const planeMaterial = new THREE.MeshStandardMaterial({
+        color: 0xffffff
+    });
+    if (withTexture) {
+        planeMaterial.map = texture;
+        planeMaterial.map.wrapS = THREE.RepeatWrapping;
+        planeMaterial.map.wrapT = THREE.RepeatWrapping;
+        planeMaterial.map.repeat.set(80, 80);
+    }
+
+    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    plane.receiveShadow = true;
+
+    scene.add(plane);
+    
+    return plane;
 }
