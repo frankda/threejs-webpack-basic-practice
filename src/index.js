@@ -22,6 +22,7 @@ function init() {
 
     // add background plane
     const planeMesh = addBackgroundPlane(scene, textureLoader.load(PlaneTexture));
+    planeMesh.position.set(0, 0, -100);
 
     // animation setting for loaded gltf model
     let mixer;
