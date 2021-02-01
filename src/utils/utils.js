@@ -47,6 +47,26 @@ export function initDefaultLighting(scene, initialPosition) {
     scene.add(ambientLight);
 }
 
+export function initDirectionalLighting(scene, initialPosition) {
+    const position = (initialPosition !== undefined) ? initialPosition : new THREE.Vector3(-10, 30, 40);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff)
+    directionalLight.position.copy(poistion)
+    directionalLight.castShadow = false;
+    directionalLight.shadow.camera.near = 2;
+    directionalLight.shadow.camera.far = 80;
+    directionalLight.shadow.camera.left = -30;
+    directionalLight.shadow.camera.right = 30;
+    directionalLight.shadow.camera.top = 30;
+    directionalLight.shadow.camera.bottom = -30;
+
+    directionalLight.intensity = 0.5;
+    directionalLight.shadow.mapSize.width = 1024;
+    directionalLight.shadow.mapSize.height = 1024;
+
+    scene.add(directionalLight);
+}
+
 export function initCamera(initialPosition) {
     const position = (initialPosition !== undefined) ? initialPosition : new THREE.Vector3(-30, 40, 30);
 
